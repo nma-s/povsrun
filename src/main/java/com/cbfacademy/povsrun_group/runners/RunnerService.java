@@ -1,0 +1,44 @@
+package com.cbfacademy.povsrun_group.runners;
+
+import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.UUID;
+
+import org.springframework.dao.OptimisticLockingFailureException;
+import org.springframework.stereotype.Service;
+
+@Service
+public class RunnerService {
+
+    private RunnerRepository runnerRepo;
+
+    public RunnerService(RunnerRepository runnerRepo){
+        this.runnerRepo = runnerRepo;
+    }
+
+    public Runner getRunner(UUID id) throws NoSuchElementException{
+        return runnerRepo.findById(id).orElseThrow();
+    }
+
+    public List<Runner> getAllRunners() throws IllegalArgumentException{
+        return runnerRepo.findAll();
+    }
+
+    public Runner createRunner(Runner runner) throws IllegalArgumentException, OptimisticLockingFailureException{
+        return runnerRepo.save(runner);
+    }
+
+    public Runner updateRunner(UUID id, Runner updatedRunner) throws NoSuchElementException{
+        Runner runner = getRunner(id);
+        runner.setFirstName(updatedRunner.getFirstName());
+        runner.setLastName(updatedRunner.getLastName());
+        runner.setGender(updatedRunner.getGender());
+        return runnerRepo.save(runner);
+    }
+
+    public void deleteRunner(UUID id) throws NoSuchElementException{
+        Runner runner = getRunner(id);
+        runnerRepo.delete(runner);
+    }
+
+}

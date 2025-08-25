@@ -54,4 +54,7 @@ public class Runner {
         return gender;
     }
 
+    public void setGender(Gender updatedGender){
+        this.gender = updatedGender;
+    }
 }

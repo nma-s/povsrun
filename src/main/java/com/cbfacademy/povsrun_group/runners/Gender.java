@@ -13,7 +13,7 @@ public enum Gender {
     }
 
     public static Gender convertInput(String value) {
-        if (value == null)
+        if (value == null || value.isEmpty())
             return PREFER_NOT_TO_SAY;
         String v = value.trim().toUpperCase();
         switch (v) {
@@ -27,7 +27,7 @@ public enum Gender {
             case "OTHER":
                 return OTHER;
             default:
-                throw new IllegalArgumentException("Invalid Gender Input");
+                throw new IllegalArgumentException("Invalid Gender Input. Please enter Female, Male or Other");
         }
     }
 

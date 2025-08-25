@@ -1,5 +1,7 @@
 package com.cbfacademy.povsrun_group.runners;
 
+import java.math.BigDecimal;
+import java.time.Instant;
 import java.util.UUID;
 
 import jakarta.persistence.Entity;
@@ -11,11 +13,11 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="runner")
+@Table(name = "runners")
 public class Runner {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.UUID)
 
     public UUID id;
     public String firstName;
@@ -28,6 +30,10 @@ public class Runner {
         this.firstName = firstName;
         this.lastName = lastName;
         this.gender = Gender.convertInput(gender);
+    }
+
+    public Runner(){
+        this("Jane", "Doe","");
     }
 
     public UUID getId(){

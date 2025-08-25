@@ -3,6 +3,7 @@ package com.cbfacademy.povsrun_group.runners;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.UUID;
 
@@ -13,12 +14,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 
 
 @RestController
-@RequestMapping("/runner")
+@RequestMapping("/runners")
 public class RunnerController {
 
     private RunnerService runnerService;
@@ -27,8 +29,14 @@ public class RunnerController {
         this.runnerService = runnerService;
     }
 
+    @GetMapping()
+    public List<Runner> getAllRunners(){
+        return runnerService.getAllRunners();
+        
+    }
+
     @GetMapping("/{id}")
-    public ResponseEntity<Runner> getRunner(@PathVariable UUID id) {
+    public ResponseEntity<?> getRunner(@PathVariable UUID id) {
         try {
             Runner runner = runnerService.getRunner(id);
             return ResponseEntity.ok(runner);
@@ -39,7 +47,7 @@ public class RunnerController {
     }
 
     @PostMapping
-    public ResponseEntity<Runner> createRunner(Runner runner) {
+    public ResponseEntity<Runner> createRunner(@RequestBody Runner runner) {
         Runner newRunner = runnerService.createRunner(runner);
         ResponseEntity<Runner> createdRunner = ResponseEntity.status(HttpStatus.CREATED).body(newRunner);
         return createdRunner;

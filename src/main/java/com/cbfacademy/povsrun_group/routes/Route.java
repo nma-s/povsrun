@@ -20,20 +20,22 @@ public class Route {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     public Long routeId;
-    public Integer distance;
+    public Integer distanceInKm;
     public String startingPoint;
+
     @ElementCollection
-    @CollectionTable(name="Via Route", joinColumns = @JoinColumn(name = "route_id"))
+    @CollectionTable(name="route_via", joinColumns = @JoinColumn(name = "route_id"))
+    
     public List<String> viaRoute;
 
     public Route(Integer distance, String startingPoint, List<String> via){
-        this.distance = distance;
+        this.distanceInKm = distance;
         this.startingPoint = startingPoint;
         this.viaRoute = new ArrayList<>(via);
     }
     
     public Route(){
-        this.distance = 5;
+        this.distanceInKm = 5;
         this.startingPoint = "Elephant and Castle Square";
         this.viaRoute = new ArrayList<>(List.of("London Brigde", "Waterloo Bridge"));
     }
@@ -42,12 +44,12 @@ public class Route {
         return routeId;
     }
 
-    public Integer getDistance(){
-        return distance; 
+    public Integer getDistanceInKm(){
+        return distanceInKm; 
     }
 
-    public void setDistance(Integer distance){
-        this.distance = distance;
+    public void setDistanceInKm(Integer distance){
+        this.distanceInKm = distance;
     }
 
     public String getStartingPoint(){

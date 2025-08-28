@@ -7,5 +7,7 @@ import org.springframework.data.repository.ListCrudRepository;
 public interface RouteRepository extends ListCrudRepository<Route, Long> {
 
     public List<Route> findByDistanceInKm(int distance);
+
+    public List<Route> findByViaRoutesContaining(String viaString);
     
 } 

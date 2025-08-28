@@ -4,17 +4,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.NoSuchElementException;
-
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -27,6 +23,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 public class RouteController {
 
     public RouteService routeService;
+
+    public RouteController(RouteService routeService){
+        this.routeService = routeService;
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getRoute(@PathVariable Long routeId) {
@@ -51,7 +51,7 @@ public class RouteController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateRoute(@PathVariable Long routeId, @RequestBody Route updatedRoute) {
+    public ResponseEntity<?> updateRoute(@PathVariable("id") Long routeId, @RequestBody Route updatedRoute) {
        try {
         Route route = routeService.updateRoute(routeId, updatedRoute);
         return ResponseEntity.ok(route);

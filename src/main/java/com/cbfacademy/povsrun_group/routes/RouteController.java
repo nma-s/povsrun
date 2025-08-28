@@ -1,6 +1,7 @@
 package com.cbfacademy.povsrun_group.routes;
 
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -40,8 +41,13 @@ public class RouteController {
     }
 
     @GetMapping()
-    public List<Route> getAllRoutes() {
-        return routeService.getAllRoutes();
+    public List<Route> getAllRoutes(@RequestParam(required = false) Integer distanceInKm) {
+        if(distanceInKm == null){
+            return routeService.getAllRoutes();
+        } else {
+            return routeService.getRoutesByDistanceInKm(distanceInKm);
+        }
+        
     }
 
     @PostMapping()

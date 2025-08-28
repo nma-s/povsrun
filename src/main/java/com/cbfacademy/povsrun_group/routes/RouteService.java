@@ -9,7 +9,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class RouteService {
 
-RouteRepository routeRepository;
+public RouteRepository routeRepository;
+
+public RouteService(RouteRepository routeRepository){
+    this.routeRepository = routeRepository;
+}
 
 public List<Route> getAllRoutes(){
     return routeRepository.findAll();
@@ -25,7 +29,7 @@ public Route createRoute(Route route) throws IllegalArgumentException, Optimisti
 
 public Route updateRoute(Long routeId, Route newRoute) throws NoSuchElementException{
     Route route = getRoute(routeId);
-    route.setDistance(newRoute.getDistance());
+    route.setDistanceInKm(newRoute.getDistanceInKm());
     route.setStartingPoint(newRoute.getStartingPoint());
     route.setViaRoute(newRoute.getViaRoute());
     return routeRepository.save(route);

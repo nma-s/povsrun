@@ -23,6 +23,10 @@ public Route getRoute(Long routeId) throws NoSuchElementException{
     return routeRepository.findById(routeId).orElseThrow();
 }
 
+public List<Route> getRoutesByDistanceInKm(Integer distance) {
+    return routeRepository.findByDistanceInKm(distance);
+}
+
 public Route createRoute(Route route) throws IllegalArgumentException, OptimisticLockingFailureException {
     return routeRepository.save(route);
 }

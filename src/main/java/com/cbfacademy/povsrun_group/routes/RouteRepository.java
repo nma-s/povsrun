@@ -14,5 +14,8 @@ public interface RouteRepository extends ListCrudRepository<Route, Long> {
 
     @Query("SELECT r FROM Route r JOIN r.viaRoute v WHERE lower(v) LIKE CONCAT('%',lower(:viaRoute),'%')")
     public List<Route> findRoutesByViaRoute(@Param("viaRoute") String viaRoute);
+
+    @Query("SELECT r FROM Route r WHERE r.startingPoint LIKE CONCAT('%', lower(:startingPoint),'%')")
+    public List<Route> findByStartingPoint(@Param("startingPoint") String startingPoint);
     
 } 

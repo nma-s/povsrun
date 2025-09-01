@@ -35,6 +35,10 @@ public List<Route> getRoutesByViaRoute(String viaRoute) {
     return routeRepository.findRoutesByViaRoute(viaRoute);
 }
 
+public List<Route> getRoutesByStartingPoint(String startingPoint){
+    return routeRepository.findByStartingPoint(startingPoint);
+}
+
 public Route createRoute(Route route) throws IllegalArgumentException, OptimisticLockingFailureException {
     return routeRepository.save(route);
 }

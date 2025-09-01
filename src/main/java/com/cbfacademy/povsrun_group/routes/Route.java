@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.CollectionTable;
+import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -26,6 +27,7 @@ public class Route {
     @ElementCollection
     @CollectionTable(name="route_via", joinColumns = @JoinColumn(name = "route_id"))
     
+    @Column(name="via_route")
     public List<String> viaRoute;
 
     public Route(Integer distance, String startingPoint, List<String> via){

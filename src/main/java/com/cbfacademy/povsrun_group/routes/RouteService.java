@@ -27,6 +27,14 @@ public List<Route> getRoutesByDistanceInKm(Integer distance) {
     return routeRepository.findByDistanceInKm(distance);
 }
 
+// public List<Route> getRoutesByViaRouteContaining(String viaRoute){
+//     return routeRepository.findByViaRouteContaining(viaRoute);
+// }
+
+public List<Route> getRoutesByViaRoute(String viaRoute) {
+    return routeRepository.findRoutesByViaRoute(viaRoute);
+}
+
 public Route createRoute(Route route) throws IllegalArgumentException, OptimisticLockingFailureException {
     return routeRepository.save(route);
 }

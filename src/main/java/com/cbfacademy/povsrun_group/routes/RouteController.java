@@ -41,13 +41,14 @@ public class RouteController {
     }
 
     @GetMapping()
-    public List<Route> getAllRoutes(@RequestParam(required = false) Integer distanceInKm) {
-        if(distanceInKm == null){
-            return routeService.getAllRoutes();
-        } else {
+    public List<Route> getAllRoutes(@RequestParam(required = false) Integer distanceInKm, String viaRoute) {
+        if(viaRoute != null && !viaRoute.isEmpty()){
+            return routeService.getRoutesByViaRoute(viaRoute);
+        } else if(distanceInKm != null && viaRoute == null){
             return routeService.getRoutesByDistanceInKm(distanceInKm);
+        } else {
+            return routeService.getAllRoutes();
         }
-        
     }
 
     @PostMapping()

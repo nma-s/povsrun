@@ -1,17 +1,23 @@
 package com.cbfacademy.povsrun_group.events;
 
 import java.time.LocalDate;
-import java.time.Month;
+
+import java.time.format.TextStyle;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
-import java.util.UUID;
+import java.util.Locale;
+import java.util.Set;
 
 import com.cbfacademy.povsrun_group.routes.Route;
-import com.cbfacademy.povsrun_group.runners.Runner;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -23,14 +29,17 @@ public class RunEvent {
 
     public Long id;
     public LocalDate date;
-    public Month month;
+    public String month;
+    public String day;
     // public List<Runner> particpants;
     // public String image;
-    // public Route route;
+    @ManyToMany()
+    @JoinTable(name = "event_route", joinColumns = @JoinColumn(name="event_id"), inverseJoinColumns = @JoinColumn(name = "route_id"))
+    public Set<Route> assignedRoutes = new HashSet<>();
 
-    public RunEvent(String date){
-        this.date = LocalDate.parse(date);
-        this.month = LocalDate.parse(date).getMonth();
+    public RunEvent(LocalDate date){
+        this.date = date;
+        // this.month = date.getMonth().getDisplayName(TextStyle.FULL, Locale.UK);
     }
 
     public RunEvent(){
@@ -41,15 +50,24 @@ public class RunEvent {
         return date;
     }
 
-    public void getDate(String date){
-        this.date = LocalDate.parse(date);
+    public void setDate(LocalDate date){
+        this.date = date;
     }
 
-    public Month getMonth() {
-        return month;
+    public String getMonth() {
+        return date.getMonth().getDisplayName(TextStyle.FULL, Locale.UK);
+    }
+    
+    public String getDay() {
+        return date.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.UK);
     }
 
-
-
-
+    public Set<Route> getAssignedRoutes(){
+    return assignedRoutes;
 }
+
+public void setAssignedRoutes(Set<Route> route){
+    this.assignedRoutes = route;
+}
+}
+

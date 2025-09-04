@@ -11,15 +11,18 @@ import org.springframework.stereotype.Service;
 import com.cbfacademy.povsrun_group.routes.Route;
 import com.cbfacademy.povsrun_group.routes.RouteRepository;
 import com.cbfacademy.povsrun_group.runners.Runner;
+import com.cbfacademy.povsrun_group.runners.RunnerRepository;
 
 @Service
 public class RunEventService {
     RunEventRepository eventRepo;
     RouteRepository routeRepo;
+    RunnerRepository runnerRepo;
 
-    public RunEventService(RunEventRepository eventRepo, RouteRepository routeRepo){
+    public RunEventService(RunEventRepository eventRepo, RouteRepository routeRepo, RunnerRepository runnerRepo){
         this.eventRepo = eventRepo;
         this.routeRepo = routeRepo;
+        this.runnerRepo = runnerRepo;
     }
 
     public RunEvent getRunEvent(Long eventId) throws NoSuchElementException{
@@ -53,6 +56,16 @@ public class RunEventService {
         routeSet.add(route);
         event.setAssignedRoutes(routeSet);
        return eventRepo.save(event);
+    }
+
+    public RunEvent assignParticipantsToRunEvent(Long eventId, UUID runnerId) {
+        Set<Runner> participantSet ;
+        RunEvent event = getRunEvent(eventId);
+        Runner runner = runnerRepo.findById(runnerId).get();
+        participantSet = event.getParticipants();
+        participantSet.add(runner);
+        event.setParticipants(participantSet);
+        return eventRepo.save(event);
     }
 
 }

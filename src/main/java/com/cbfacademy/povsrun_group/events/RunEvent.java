@@ -3,13 +3,12 @@ package com.cbfacademy.povsrun_group.events;
 import java.time.LocalDate;
 
 import java.time.format.TextStyle;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 
 import com.cbfacademy.povsrun_group.routes.Route;
+import com.cbfacademy.povsrun_group.runners.Runner;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -26,24 +25,40 @@ public class RunEvent {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     public Long id;
+
+    public String name;
     public LocalDate date;
     public String month;
     public String day;
-    // public List<Runner> particpants;
-    // public String image;
     @ManyToMany()
-    @JoinTable(name = "event_route", joinColumns = @JoinColumn(name="event_id"), inverseJoinColumns = @JoinColumn(name = "route_id"))
+    @JoinTable(name = "event_participants", joinColumns = @JoinColumn(name = "event_id"), inverseJoinColumns = @JoinColumn(name = "runner_id"))
+    public Set<Runner> particpants = new HashSet<>();
+    
+    @ManyToMany()
+    @JoinTable(name = "event_routes", joinColumns = @JoinColumn(name="event_id"), inverseJoinColumns = @JoinColumn(name = "route_id"))
     public Set<Route> assignedRoutes = new HashSet<>();
 
-    public RunEvent(LocalDate date){
+    public RunEvent(String name, LocalDate date){
+        this.name = name;
         this.date = date;
-        // this.month = date.getMonth().getDisplayName(TextStyle.FULL, Locale.UK);
     }
 
     public RunEvent(){
+        this.name = "";
         this.date = LocalDate.parse("2025-01-01");
+    }
+
+    public Long getEventId(){
+        return id;
+    }
+
+    public String getName(){
+        return name;
+    }
+
+    public void setName(String name){
+        this.name = name;
     }
 
     public LocalDate getDate(){
@@ -64,10 +79,18 @@ public class RunEvent {
 
     public Set<Route> getAssignedRoutes(){
     return assignedRoutes;
-}
+    }
 
-public void setAssignedRoutes(Set<Route> route){
-    this.assignedRoutes = route;
-}
+    public void setAssignedRoutes(Set<Route> routes){
+        this.assignedRoutes = routes;
+    }
+
+    public Set<Runner> getParticipants() {
+        return particpants;
+    }
+
+    public void setParticipants(Set<Runner> participants) {
+        this.particpants = participants;
+    }
 }
 

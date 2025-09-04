@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 @RestController
@@ -33,6 +32,17 @@ public class RunEventController {
         return eventService.getAllRunEvents();
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getRunEvent(@PathVariable Long eventId) {
+        try {
+            RunEvent event = eventService.getRunEvent(eventId);
+            return ResponseEntity.ok(event);
+        } catch (NoSuchElementException e) {
+
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Route Not Found", e);
+        }
+    }
+
     @PostMapping()
     public ResponseEntity<RunEvent> postRoute(@RequestBody RunEvent newRunEvent) {
         RunEvent runEvent= eventService.createRunEvent(newRunEvent);
@@ -40,11 +50,11 @@ public class RunEventController {
     }
 
     @PutMapping("/{eventId}/route/{routeId}")
-    public ResponseEntity<?> assignRouteToRunEvent(@PathVariable("eventId") Long runEventId, @PathVariable("routeId") Long routeId,
+    public ResponseEntity<?> assignRouteToRunEvent(@PathVariable("eventId") Long eventId, @PathVariable("routeId") Long routeId,
             @RequestBody RunEvent updatedRunEvent) {
         try {
             
-            RunEvent runEvent = eventService.assignRouteToRunEvent(runEventId, routeId);
+            RunEvent runEvent = eventService.assignRouteToRunEvent(eventId, routeId);
             return ResponseEntity.ok(runEvent);
 
         } catch (NoSuchElementException e) {

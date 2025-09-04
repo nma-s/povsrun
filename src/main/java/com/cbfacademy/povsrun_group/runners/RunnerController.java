@@ -5,7 +5,6 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.UUID;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,7 +35,7 @@ public class RunnerController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getRunner(@PathVariable UUID id) {
+    public ResponseEntity<?> getRunner(@PathVariable Long id) {
         try {
             Runner runner = runnerService.getRunner(id);
             return ResponseEntity.ok(runner);
@@ -54,7 +53,7 @@ public class RunnerController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Runner> updateRunner(@PathVariable UUID id, Runner updatedRunner) {
+    public ResponseEntity<Runner> updateRunner(@PathVariable Long id, Runner updatedRunner) {
         try{
         Runner runner = runnerService.updateRunner(id, updatedRunner);
         ResponseEntity<Runner> runnerEntity = ResponseEntity.ok(runner);
@@ -65,7 +64,7 @@ public class RunnerController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteRunner(@PathVariable UUID id){
+    public ResponseEntity<?> deleteRunner(@PathVariable Long id){
         try {
             runnerService.deleteRunner(id);
             return ResponseEntity.noContent().build();

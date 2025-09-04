@@ -2,7 +2,6 @@ package com.cbfacademy.povsrun_group.runners;
 
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.UUID;
 
 import org.springframework.dao.OptimisticLockingFailureException;
 import org.springframework.stereotype.Service;
@@ -16,7 +15,7 @@ public class RunnerService {
         this.runnerRepo = runnerRepo;
     }
 
-    public Runner getRunner(UUID id) throws NoSuchElementException{
+    public Runner getRunner(Long id) throws NoSuchElementException{
         return runnerRepo.findById(id).orElseThrow();
     }
 
@@ -28,7 +27,7 @@ public class RunnerService {
         return runnerRepo.save(runner);
     }
 
-    public Runner updateRunner(UUID id, Runner updatedRunner) throws NoSuchElementException{
+    public Runner updateRunner(Long id, Runner updatedRunner) throws NoSuchElementException{
         Runner runner = getRunner(id);
         runner.setFirstName(updatedRunner.getFirstName());
         runner.setLastName(updatedRunner.getLastName());
@@ -36,7 +35,7 @@ public class RunnerService {
         return runnerRepo.save(runner);
     }
 
-    public void deleteRunner(UUID id) throws NoSuchElementException{
+    public void deleteRunner(Long id) throws NoSuchElementException{
         Runner runner = getRunner(id);
         runnerRepo.delete(runner);
     }

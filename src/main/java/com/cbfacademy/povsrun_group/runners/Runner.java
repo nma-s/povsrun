@@ -15,9 +15,9 @@ import jakarta.persistence.Table;
 public class Runner {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 
-    public UUID id;
+    public Long id;
     public String firstName;
     public String lastName;
 
@@ -34,7 +34,7 @@ public class Runner {
         this("Jane", "Doe","");
     }
 
-    public UUID getId(){
+    public Long getId(){
         return id;
     }
 

@@ -1,7 +1,5 @@
 package com.cbfacademy.povsrun_group.runners;
 
-import java.math.BigDecimal;
-import java.time.Instant;
 import java.util.UUID;
 
 import jakarta.persistence.Entity;

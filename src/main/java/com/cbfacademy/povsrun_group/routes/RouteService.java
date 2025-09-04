@@ -45,6 +45,7 @@ public Route createRoute(Route route) throws IllegalArgumentException, Optimisti
 
 public Route updateRoute(Long routeId, Route newRoute) throws NoSuchElementException{
     Route route = getRoute(routeId);
+    route.setName(newRoute.getName());
     route.setDistanceInKm(newRoute.getDistanceInKm());
     route.setStartingPoint(newRoute.getStartingPoint());
     route.setViaRoute(newRoute.getViaRoute());

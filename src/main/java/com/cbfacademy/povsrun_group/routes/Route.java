@@ -30,6 +30,7 @@ public class Route {
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "route-sequence")
 
     public Long routeId;
+    public String name;
     public Float distanceInKm;
     public String startingPoint;
 
@@ -43,7 +44,8 @@ public class Route {
     @ManyToMany(mappedBy = "assignedRoutes" )
     protected Set<RunEvent> runEventSet = new HashSet<>();
 
-    public Route(Float distance, String startingPoint, List<String> via){
+    public Route(String name,Float distance,String startingPoint, List<String> via){
+        this.name = name;
         this.distanceInKm = distance;
         this.startingPoint = startingPoint;
         this.viaRoute = new ArrayList<>(via);
@@ -57,6 +59,14 @@ public class Route {
 
     public Long getRouteId(){
         return routeId;
+    }
+
+    public String getName(){
+        return name;
+    }
+
+    public void setName(String name){
+        this.name = name;
     }
 
     public Float getDistanceInKm(){

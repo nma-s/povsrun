@@ -33,7 +33,7 @@ public class RunEvent {
     public String day;
     @ManyToMany()
     @JoinTable(name = "event_participants", joinColumns = @JoinColumn(name = "event_id"), inverseJoinColumns = @JoinColumn(name = "runner_id"))
-    public Set<Runner> particpants = new HashSet<>();
+    public Set<Runner> participants = new HashSet<>();
     
     @ManyToMany()
     @JoinTable(name = "event_routes", joinColumns = @JoinColumn(name="event_id"), inverseJoinColumns = @JoinColumn(name = "route_id"))
@@ -49,7 +49,7 @@ public class RunEvent {
         this.date = LocalDate.parse("2025-01-01");
     }
 
-    public Long getEventId(){
+    public Long getId(){
         return id;
     }
 
@@ -86,11 +86,11 @@ public class RunEvent {
     }
 
     public Set<Runner> getParticipants() {
-        return particpants;
+        return participants;
     }
 
     public void setParticipants(Set<Runner> participants) {
-        this.particpants = participants;
+        this.participants = participants;
     }
 }
 

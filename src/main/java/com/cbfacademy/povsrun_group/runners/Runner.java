@@ -31,7 +31,7 @@ public class Runner {
     }
 
     public Runner(){
-        this("Jane", "Doe","");
+        this("", "", "");
     }
 
     public Long getId(){

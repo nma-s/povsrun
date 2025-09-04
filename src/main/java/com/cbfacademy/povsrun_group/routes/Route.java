@@ -73,8 +73,8 @@ public class Route {
         return distanceInKm; 
     }
 
-    public void setDistanceInKm(Float distance){
-        this.distanceInKm = distance;
+    public void setDistanceInKm(Float distanceInKm){
+        this.distanceInKm = distanceInKm;
     }
 
     public String getStartingPoint(){

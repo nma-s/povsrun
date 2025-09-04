@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 
 @RestController
-@RequestMapping("/runevent")
+@RequestMapping("/api/runevents")
 public class RunEventController {
 
     protected RunEventService eventService;
@@ -49,9 +49,8 @@ public class RunEventController {
         return ResponseEntity.status(HttpStatus.CREATED).body(runEvent);
     }
 
-    @PutMapping("/{eventId}/route/{routeId}")
-    public ResponseEntity<?> assignRouteToRunEvent(@PathVariable("eventId") Long eventId, @PathVariable("routeId") Long routeId,
-            @RequestBody RunEvent updatedRunEvent) {
+    @PutMapping("/{eventId}/routes/{routeId}")
+    public ResponseEntity<RunEvent> assignRouteToRunEvent(@PathVariable("eventId") Long eventId, @PathVariable("routeId") Long routeId) {
         try {
             
             RunEvent runEvent = eventService.assignRouteToRunEvent(eventId, routeId);
@@ -61,6 +60,19 @@ public class RunEventController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Run Event not found", e);
         }
     }
+
+    @PutMapping("/{eventId}/runners/{runnerId}")
+    public ResponseEntity<RunEvent> assignParticipantsToRunEvent(@PathVariable("eventId") Long eventId,
+            @PathVariable("runnerId") Long runnerId) {
+        try {
+            RunEvent runEvent = eventService.assignParticipantsToRunEvent(eventId, runnerId);
+            return ResponseEntity.ok(runEvent);
+
+        } catch (NoSuchElementException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Run Event not found", e);
+        }
+    }
+    
 
     @PutMapping("/{id}")
     public ResponseEntity<?> updateRunEvent(@PathVariable("id") Long runEventId, @RequestBody RunEvent updatedRunEvent) {

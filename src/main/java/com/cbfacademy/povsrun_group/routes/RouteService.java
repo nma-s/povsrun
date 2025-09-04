@@ -23,7 +23,7 @@ public Route getRoute(Long routeId) throws NoSuchElementException{
     return routeRepository.findById(routeId).orElseThrow();
 }
 
-public List<Route> getRoutesByDistanceInKm(Integer distance) {
+public List<Route> getRoutesByDistanceInKm(Float distance) {
     return routeRepository.findByDistanceInKm(distance);
 }
 

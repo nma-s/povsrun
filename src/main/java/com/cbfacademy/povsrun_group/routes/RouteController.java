@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 
 
 @RestController
-@RequestMapping("/route")
+@RequestMapping("/api/routes")
 public class RouteController {
 
     public RouteService routeService;
@@ -41,7 +41,7 @@ public class RouteController {
     }
 
     @GetMapping()
-    public List<Route> getAllRoutes(@RequestParam(required = false) Integer distanceInKm, String viaRoute, String startingPoint) {
+    public List<Route> getAllRoutes(@RequestParam(required = false) Float distanceInKm, String viaRoute, String startingPoint) {
         if(viaRoute != null && !viaRoute.isEmpty()){
             return routeService.getRoutesByViaRoute(viaRoute);
         } else if(distanceInKm != null && viaRoute == null){

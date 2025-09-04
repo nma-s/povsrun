@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @RestController
-@RequestMapping("/runners")
+@RequestMapping("/api/runners")
 public class RunnerController {
 
     private RunnerService runnerService;

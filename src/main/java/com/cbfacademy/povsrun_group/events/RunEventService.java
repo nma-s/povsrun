@@ -44,7 +44,6 @@ public class RunEventService {
     }
 
      public void deleteRunEvent(Long id) throws NoSuchElementException{
-        // RunEvent runEvent = getRunEvent(id);
         eventRepo.deleteById(id);
     }
 
@@ -58,7 +57,7 @@ public class RunEventService {
        return eventRepo.save(event);
     }
 
-    public RunEvent assignParticipantsToRunEvent(Long eventId, UUID runnerId) {
+    public RunEvent assignParticipantsToRunEvent(Long eventId, Long runnerId) {
         Set<Runner> participantSet ;
         RunEvent event = getRunEvent(eventId);
         Runner runner = runnerRepo.findById(runnerId).get();

@@ -29,6 +29,10 @@ public class RunEventService {
         return eventRepo.findById(eventId).orElseThrow();
     }
 
+    public List<RunEvent> getRunEventsByMonth(int month) throws NoSuchElementException {
+        return eventRepo.findByMonth(month);
+    }
+
     public List<RunEvent> getAllRunEvents(){
         return eventRepo.findAll();
     }

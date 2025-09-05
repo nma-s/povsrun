@@ -1,6 +1,7 @@
 package com.cbfacademy.povsrun_group.events;
 
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -30,6 +31,11 @@ public class RunEventController {
     @GetMapping()
     public List<RunEvent> getAllRunEvents() {
         return eventService.getAllRunEvents();
+    }
+
+    @GetMapping("/by-month")
+    public List<RunEvent> getRunEventsByMonth(@RequestParam (required = true) int month) {
+        return eventService.getRunEventsByMonth(month);
     }
 
     @GetMapping("/{id}")

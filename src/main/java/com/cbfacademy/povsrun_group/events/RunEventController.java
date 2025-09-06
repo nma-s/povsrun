@@ -38,8 +38,8 @@ public class RunEventController {
         return eventService.getRunEventsByMonth(month);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<?> getRunEvent(@PathVariable Long eventId) {
+    @GetMapping("/{eventId}")
+    public ResponseEntity<?> getRunEvent(@PathVariable("eventId") Long eventId) {
         try {
             RunEvent event = eventService.getRunEvent(eventId);
             return ResponseEntity.ok(event);
@@ -80,10 +80,10 @@ public class RunEventController {
     }
     
 
-    @PutMapping("/{id}")
-    public ResponseEntity<?> updateRunEvent(@PathVariable("id") Long runEventId, @RequestBody RunEvent updatedRunEvent) {
+    @PutMapping("/{eventId}")
+    public ResponseEntity<?> updateRunEvent(@PathVariable("eventId") Long eventId, @RequestBody RunEvent updatedRunEvent) {
        try {
-        RunEvent runEvent = eventService.updateRunEvent(runEventId, updatedRunEvent);
+        RunEvent runEvent = eventService.updateRunEvent(eventId, updatedRunEvent);
         return ResponseEntity.ok(runEvent);
 
        } catch (NoSuchElementException e) {
@@ -91,10 +91,10 @@ public class RunEventController {
        }
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteRunEvent(@PathVariable("id") Long runEventId){
+    @DeleteMapping("/{eventId}")
+    public ResponseEntity<?> deleteRunEvent(@PathVariable("eventId") Long eventId){
         try {
-            eventService.deleteRunEvent(runEventId);
+            eventService.deleteRunEvent(eventId);
             return ResponseEntity.noContent().build();
         } catch (NoSuchElementException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Run event Not Found", e);

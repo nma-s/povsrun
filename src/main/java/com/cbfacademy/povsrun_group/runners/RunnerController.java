@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/api/runners")
 public class RunnerController {
 
-    private RunnerService runnerService;
+    protected RunnerService runnerService;
 
     public RunnerController(RunnerService runnerService) {
         this.runnerService = runnerService;
@@ -35,7 +35,7 @@ public class RunnerController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getRunner(@PathVariable Long id) {
+    public ResponseEntity<?> getRunner(@PathVariable() Long id) {
         try {
             Runner runner = runnerService.getRunner(id);
             return ResponseEntity.ok(runner);

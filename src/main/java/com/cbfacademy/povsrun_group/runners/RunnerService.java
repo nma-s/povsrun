@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class RunnerService {
 
-    private RunnerRepository runnerRepo;
+    protected RunnerRepository runnerRepo;
 
     public RunnerService(RunnerRepository runnerRepo){
         this.runnerRepo = runnerRepo;

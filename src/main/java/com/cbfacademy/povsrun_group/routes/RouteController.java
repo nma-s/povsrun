@@ -30,7 +30,7 @@ public class RouteController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getRoute(@PathVariable Long routeId) {
+    public ResponseEntity<?> getRoute(@PathVariable("id") Long routeId) {
         try {
             Route route = routeService.getRoute(routeId);
            return  ResponseEntity.ok(route);

@@ -17,9 +17,9 @@ public class Runner {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
-    public Long id;
-    public String firstName;
-    public String lastName;
+    protected Long id;
+    protected String firstName;
+    protected String lastName;
 
     @Enumerated(EnumType.STRING)
     public Gender gender;

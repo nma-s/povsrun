@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class RouteService {
 
-public RouteRepository routeRepository;
+protected RouteRepository routeRepository;
 
 public RouteService(RouteRepository routeRepository){
     this.routeRepository = routeRepository;

@@ -29,10 +29,10 @@ public class Route {
     @SequenceGenerator(name = "route-sequence", initialValue = 100, allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "route-sequence")
 
-    public Long routeId;
-    public String name;
-    public Float distanceInKm;
-    public String startingPoint;
+    protected Long routeId;
+    protected String name;
+    protected Float distanceInKm;
+    protected String startingPoint;
 
     @ElementCollection
     @CollectionTable(name="route_via", joinColumns = @JoinColumn(name = "route_id"))

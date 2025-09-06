@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 @RequestMapping("/api/routes")
 public class RouteController {
 
-    public RouteService routeService;
+    protected RouteService routeService;
 
     public RouteController(RouteService routeService){
         this.routeService = routeService;

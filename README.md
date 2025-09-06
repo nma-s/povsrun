@@ -1,7 +1,7 @@
 # Run Club API
 
 A simple Spring Boot REST API to manage run events, routes, and runners for a run club.
-You can create events, attach existing routes and participants, and query routes by distance, starting point and via routes and also query events by the month.
+Create events, attach existing routes and participants, and query routes by distance/starting point/via routes and also query events by the month.
 
 ## Tech Stack
 
@@ -11,13 +11,13 @@ You can create events, attach existing routes and participants, and query routes
 4. Maven
 
 
-## Project Structure
+## Domain Model
 
-**RunEvent** – an event on a specific date; can have many routes and many participants. Derived field month is computed from date and returned in JSON.
+- **RunEvent** – a named event on a specific `date` that can have many routes and many participants. `Month` / `Day` are derived from date.
 
-**Route** – a route with distanceInKm, startingPoint, and viaRoute points (bridges, landmarks, etc.).
+- **Route** – a route with `name` , `distanceInKm` , `startingPoint` , and a list of `viaRoute` points (bridges, landmarks, etc.).
 
-**Runner** – a participant with firstName, lastName, and gender.
+- **Runner** – a participant with `firstName` , `lastName` , and `gender`.
 
 #### Enitity Relationships:
 
@@ -28,16 +28,54 @@ You can create events, attach existing routes and participants, and query routes
 
 ## Getting Started
 
-1. Clone the repository:
+### 1. Clone the repository:
 ```
-git clone https://github.com/MatiasCarabella/formula1-driver-API.git
-cd formula1-driver-API
+git clone https://github.com/nma-s/povsrun.git
+```
+
+### 2. Database Restoration
+
+A SQL dump is included to prepopulate the database:
+
+**Dump file:** ``povsrun-group/database/povsrun_dump.sql``
+
+Use the following command to restore the database:
+
+```
+
+mysql -u <username> -p < database/povsrun_dump.sql
+
+```
+
+
+### 4. Configure
+
+Update the application properties file with the URL and your SQL username and password
+
+**file:** `src/main/resources/application.properties`
+```
+spring.datasource.url=jdbc:mysql://localhost:3306/povsrun
+spring.datasource.username=<user>
+spring.datasource.password=<password>
+```
+
+### 5. Run Spring Boot Application
+
+To start the API, run the following command from the root project directory:
+
+```
+./mvn spring-boot:run
+```
+
+### 6. Test
+```
+./mvnw test
 ```
 
 
 ## API Endpoints
 
-Base paths:
+### Base paths:
  - **Run Events:** `/api/runevents`
  - **Routes:** `/api/routes`
  - **Runners:** `/api/runners`
@@ -67,10 +105,11 @@ Base paths:
 | Method | Endpoint | Description | Params/Body |
 |:---:|---|---|----|
 | **GET** | `/api/runevents` | Retrieve a list all run events |    |
-| **GET** | `/api/runevents/{id}` | Retrieve a specific run event by ID |  |
+| **GET** | `/api/runevents/{eventId}` | Retrieve a specific run event by ID |  |
 | **POST** | `/api/runevents` | Create a new run event |`{"name": "....", "date": "YYYY-MM-DD" }`|
-| **PUT** | `/api/runevents/{id}` | Update an existing event by ID |`{"name": "....", "date": "YYYY-MM-DD" }`|
+| **PUT** | `/api/runevents/{eventId}` | Update an existing event by ID |`{"name": "....", "date": "YYYY-MM-DD" }`|
 | **PUT**| `/api/runevents/{eventId}/routes/{routeId}` | Attach existing route to event  |  |
 | **PUT** | `/api/runevents/{eventId}/runners/{runnerId}` | Attach existing runner to event | |
+| **PUT** | `/api/runevents/{eventId}/runners` | Retrieve all participants of a event | |
 | **GET** | `/api/runevents/by-month?month=9` | Lists all events in a given month | `month=1-12` |
 

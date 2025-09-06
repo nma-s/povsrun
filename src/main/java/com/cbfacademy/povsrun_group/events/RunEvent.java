@@ -67,14 +67,16 @@ public class RunEvent {
 
     public void setDate(LocalDate date){
         this.date = date;
+        this.month = date.getMonth().getDisplayName(TextStyle.FULL, Locale.UK);
+        this.day = date.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.UK);
     }
 
     public String getMonth() {
-        return date.getMonth().getDisplayName(TextStyle.FULL, Locale.UK);
+        return month;
     }
     
     public String getDay() {
-        return date.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.UK);
+        return day;
     }
 
     public Set<Route> getAssignedRoutes(){

@@ -1,7 +1,7 @@
 # Run Club API
 
 A simple Spring Boot REST API to manage run events, routes, and runners for a run club.
-Create events, attach existing routes and participants, and query routes by distance/starting point/via routes and also query events by the month.
+Create runners, routes, events, attach existing routes and participants, and query routes by distance/starting point/via routes and also query events by the month.
 
 ## Tech Stack
 

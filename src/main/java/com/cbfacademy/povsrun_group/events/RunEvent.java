@@ -25,19 +25,19 @@ public class RunEvent {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long id;
+    protected Long id;
 
-    public String name;
-    public LocalDate date;
-    public String month;
-    public String day;
+    protected String name;
+    protected LocalDate date;
+    protected String month;
+    protected String day;
     @ManyToMany()
     @JoinTable(name = "event_participants", joinColumns = @JoinColumn(name = "event_id"), inverseJoinColumns = @JoinColumn(name = "runner_id"))
-    public Set<Runner> participants = new HashSet<>();
+    protected Set<Runner> participants = new HashSet<>();
     
     @ManyToMany()
     @JoinTable(name = "event_routes", joinColumns = @JoinColumn(name="event_id"), inverseJoinColumns = @JoinColumn(name = "route_id"))
-    public Set<Route> assignedRoutes = new HashSet<>();
+    protected Set<Route> assignedRoutes = new HashSet<>();
 
     public RunEvent(String name, LocalDate date){
         this.name = name;

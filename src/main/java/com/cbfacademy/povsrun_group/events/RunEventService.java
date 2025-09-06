@@ -15,9 +15,9 @@ import com.cbfacademy.povsrun_group.runners.RunnerRepository;
 
 @Service
 public class RunEventService {
-    RunEventRepository eventRepo;
-    RouteRepository routeRepo;
-    RunnerRepository runnerRepo;
+    protected RunEventRepository eventRepo;
+    protected RouteRepository routeRepo;
+    protected RunnerRepository runnerRepo;
 
     public RunEventService(RunEventRepository eventRepo, RouteRepository routeRepo, RunnerRepository runnerRepo){
         this.eventRepo = eventRepo;

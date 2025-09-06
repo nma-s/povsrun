@@ -19,12 +19,12 @@ Create events, attach existing routes and participants, and query routes by dist
 
 - **Runner** – a participant with `firstName` , `lastName` , and `gender`.
 
-#### Enitity Relationships:
+### Relationships
 
 **Many-to-Many**
 
-1. RunEvent &rarr; Route
-2. RunEvent &rarr; Runner
+- RunEvent &rarr; Route
+- RunEvent &rarr; Runner
 
 ## Getting Started
 
@@ -110,6 +110,6 @@ To start the API, run the following command from the root project directory:
 | **PUT** | `/api/runevents/{eventId}` | Update an existing event by ID |`{"name": "....", "date": "YYYY-MM-DD" }`|
 | **PUT**| `/api/runevents/{eventId}/routes/{routeId}` | Attach existing route to event  |  |
 | **PUT** | `/api/runevents/{eventId}/runners/{runnerId}` | Attach existing runner to event | |
-| **PUT** | `/api/runevents/{eventId}/runners` | Retrieve all participants of a event | |
+| **GET** | `/api/runevents/{eventId}/runners` | Retrieve all participants of a event | |
 | **GET** | `/api/runevents/by-month?month=9` | Lists all events in a given month | `month=1-12` |
 

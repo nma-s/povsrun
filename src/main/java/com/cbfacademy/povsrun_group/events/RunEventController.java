@@ -8,6 +8,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import org.hibernate.mapping.Set;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -43,6 +44,18 @@ public class RunEventController {
         try {
             RunEvent event = eventService.getRunEvent(eventId);
             return ResponseEntity.ok(event);
+        } catch (NoSuchElementException e) {
+
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Route Not Found", e);
+        }
+    }
+
+    @GetMapping("/{eventId}/runners")
+    public ResponseEntity<?> getRunEventRunners(@PathVariable("eventId") Long eventId) {
+        try {
+            RunEvent event = eventService.getRunEvent(eventId);
+            
+            return ResponseEntity.ok(event.getParticipants());
         } catch (NoSuchElementException e) {
 
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Route Not Found", e);
